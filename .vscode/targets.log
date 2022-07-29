@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul 25 15:52:18 2022
+# Make data base, printed on Thu Jul 28 17:33:11 2022
 
 # Variables
 
@@ -79,7 +77,7 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/HPEliteBook840G1bcc78a43:@/tmp/.ICE-unix/1470,unix/HPEliteBook840G1bcc78a43:/tmp/.ICE-unix/1470
+SESSION_MANAGER = local/HPEliteBook840G1bcc78a43:@/tmp/.ICE-unix/1489,unix/HPEliteBook840G1bcc78a43:/tmp/.ICE-unix/1489
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -95,7 +93,7 @@ XDG_SESSION_DESKTOP = pantheon
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3028
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2071
 # automatic
 %F = $(notdir $%)
 # environment
@@ -107,7 +105,7 @@ QT_QPA_PLATFORMTHEME = gtk3
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1553
+SSH_AGENT_PID = 1572
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = Pantheon
 # environment
@@ -209,7 +207,7 @@ LC_ADDRESS = es_ES.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3028
+VSCODE_PID = 2071
 # variable set hash-table stats:
 # Load=99/1024=10%, Rehash=0, Collisions=10/124=8%
 
@@ -277,6 +275,8 @@ clean:
 # strcache performance: lookups = 27 / hit rate = 22%
 # hash-table stats:
 # Load=21/8192=0%, Rehash=0, Collisions=1/27=4%
-# Finished Make data base on Mon Jul 25 15:52:18 2022
+# Finished Make data base on Thu Jul 28 17:33:11 2022
 
  
+make: *** No rule to make target 'all'.  Stop.
+

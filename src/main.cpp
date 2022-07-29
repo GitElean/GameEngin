@@ -1,15 +1,14 @@
 // Your First C++ Program
 
 #include <iostream>
-#include <Game.h>
+#include <SDL2/SDL.h>
 
-int main() {
+int main( int argc, char* args[]) {
     std::cout << "Hello World!";
+    std::cout << SDL_GetTicks();
+    
 
-    while (true)
-    {
-        /* code */
-    }
+    
     
 
     return 0;
