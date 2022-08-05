@@ -1,3 +1,3 @@
 #! /bin/sh
 
-./configure.sh ; ./build.sh ; ./build/Pong  
+./configure.sh ; ./build.sh && ./build/SDLDEMO
