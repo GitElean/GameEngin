@@ -38,6 +38,8 @@ void Game::frameStart(){
     std::cout <<"...start"<<std::endl;
     frameStartTimeStamp = SDL_GetTicks();
 
+    deltaTime = frameEndTimeStamp - frameStartTimeStamp;
+
 }
 
 void Game::frameEnd(){
@@ -48,6 +50,7 @@ void Game::frameEnd(){
     {
         SDL_Delay(frameDuration - actualFrameDuration);
     }
+    counter++;
     
 }
 

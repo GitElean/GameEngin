@@ -13,6 +13,8 @@ private:
     float frameDuration;
     int counter;
 
+    float deltaTime;
+
 public:
     Game(/* args */);
     ~Game();
