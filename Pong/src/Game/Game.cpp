@@ -10,16 +10,17 @@ SDL_Rect ball;
 SDL_Rect player1;
 SDL_Rect player2;
 
-int speed = 15;
+int speed = 300;
 int dx = 1;
 int dy = 1;
-int player_Speed=speed*3;
+int player_Speed=20;
 
 
 Game::Game(){
     FPS = 60;
-    frameDuration = (1.0f / FPS);
+    frameDuration = (1.0f / FPS)* 1000.0f;
     counter = 0;
+    deltaTime = 0;
 }
 
 Game::~Game(){
@@ -94,7 +95,7 @@ void Game::frameStart(){
 
     if (frameEndTimeStamp!=0)
     {
-            deltaTime =  frameStartTimeStamp - frameEndTimeStamp ;
+            deltaTime =  (frameStartTimeStamp - frameEndTimeStamp)/1000.0f ;
     }
     
 }
@@ -102,7 +103,7 @@ void Game::frameStart(){
 void Game::frameEnd(){
     std::cout <<"...end"<<std::endl;
     frameEndTimeStamp = SDL_GetTicks();
-    float actualFrameDuration = frameEndTimeStamp - frameStartTimeStamp;
+    float actualFrameDuration = frameStartTimeStamp - frameEndTimeStamp;
     if (actualFrameDuration < frameDuration)
     {
         SDL_Delay(frameDuration - actualFrameDuration);
@@ -135,9 +136,9 @@ void Game ::update(){
     }
 
     if (
-      ball.x + ball.w >= player1.x &&
       ball.y + ball.h >= player1.y &&
-      ball.y <= player1.y + player1.h
+      ball.x + ball.w >= player1.x &&
+      ball.x <= player1.x + player1.w
       )
     {
       dx*=-1.5;

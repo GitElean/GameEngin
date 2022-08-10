@@ -14,7 +14,7 @@ private:
     float frameDuration;
     int counter;
 
-    float deltaTime;
+    double deltaTime;
     //window 
     
 
