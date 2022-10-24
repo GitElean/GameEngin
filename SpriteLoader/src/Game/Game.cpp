@@ -1,10 +1,10 @@
 #include <iostream>
+#include <string>
 #include "Game.h"
 #include <SDL2/SDL.h>
 
-SDL_Rect ball;
-SDL_Rect player1;
-SDL_Rect player2;
+SDL_Rect rec1;
+SDL_Rect rec2;
 
 
 Game::Game(){
@@ -68,10 +68,32 @@ void Game ::render(){
 
     SDL_SetRenderDrawColor(renderer, 55, 100, 100, 1);
     SDL_RenderClear(renderer);
+
+    /*
+    SDL_Surface* surface = IMG_Load("./assets/kroniireference1.png");
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+    SDL_FreeSurface(surface);
+
+    SDL_RenderCopy(renderer, texture, nullptr , &rec2);
+
+    SDL_DestroyTexture(texture);
+*/
     SDL_RenderPresent(renderer);
+    
 
 }
 void Game ::setup(){
+    rec1.x = 400;
+    rec1.y = 300;
+    rec1.h = 500;
+    rec1.w = 240;
+
+    rec2.x = 200;
+    rec2.y = 100;
+    rec2.h = 400;
+    rec2.w = 200;
+
     std::cout <<"Game setuping"<<std::endl;
 
 }

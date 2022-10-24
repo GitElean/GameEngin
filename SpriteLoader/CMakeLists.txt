@@ -18,5 +18,6 @@ target_link_libraries(${PROJECT_NAME}
   Game
   SDL2main
   SDL2
+  SDL2_image
   GL
 )
