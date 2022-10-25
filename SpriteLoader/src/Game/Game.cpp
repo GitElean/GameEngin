@@ -2,6 +2,8 @@
 #include <string>
 #include "Game.h"
 #include <SDL2/SDL.h>
+#include "sTexture.cpp"
+
 
 SDL_Rect rec1;
 SDL_Rect rec2;
@@ -79,6 +81,12 @@ void Game ::render(){
 
     SDL_DestroyTexture(texture);
 */
+
+    STexture tex = STexture(renderer, window);
+    tex.load("./assets/kroniireference1.png");
+
+    tex.render(400, 300, 500, 240);
+
     SDL_RenderPresent(renderer);
     
 
