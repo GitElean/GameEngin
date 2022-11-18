@@ -62,8 +62,7 @@ void STexture::load(std::string path){
 
     SDL_Surface* formattedSurface = SDL_ConvertSurfaceFormat(loadedSurface, format, 0);
 
-    mTexture = SDL_CreateTextureFromSurface(renderer, format, SDL_TEXTUREACCESS_STREAMING,
-                                            formattedSurface->w, formattedSurface->h);
+    mTexture = SDL_CreateTextureFromSurface(renderer, formattedSurface);
     //  newTexture = SDL_CreateTexture(renderer, SDL_GetWindowPixelFormat(window), SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h);
     tWidth = formattedSurface->w;  
     tHeight = formattedSurface->h;

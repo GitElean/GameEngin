@@ -2,7 +2,7 @@
 #include <string>
 #include "Game.h"
 #include <SDL2/SDL.h>
-#include "sTexture.cpp"
+#include <SDL2/SDL_image.h>  
 
 
 SDL_Rect rec1;
@@ -71,8 +71,8 @@ void Game ::render(){
     SDL_SetRenderDrawColor(renderer, 55, 100, 100, 1);
     SDL_RenderClear(renderer);
 
-    /*
-    SDL_Surface* surface = IMG_Load("./assets/kroniireference1.png");
+    
+    SDL_Surface* surface = IMG_Load("./assets/kroniireference1_stroke.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
     SDL_FreeSurface(surface);
@@ -80,12 +80,8 @@ void Game ::render(){
     SDL_RenderCopy(renderer, texture, nullptr , &rec2);
 
     SDL_DestroyTexture(texture);
-*/
 
-    STexture tex = STexture(renderer, window);
-    tex.load("./assets/kroniireference1.png");
 
-    tex.render(400, 300, 500, 240);
 
     SDL_RenderPresent(renderer);
     
@@ -98,9 +94,9 @@ void Game ::setup(){
     rec1.w = 240;
 
     rec2.x = 200;
-    rec2.y = 100;
-    rec2.h = 400;
-    rec2.w = 200;
+    rec2.y = 10;
+    rec2.h = 720;
+    rec2.w = 500;
 
     std::cout <<"Game setuping"<<std::endl;
 
