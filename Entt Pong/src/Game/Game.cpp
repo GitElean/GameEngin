@@ -1,7 +1,34 @@
 #include <iostream>
 #include "Game.h"
 #include <SDL2/SDL.h>
+#include <entt/entt.hpp>
 
+entt::registry reg;
+entt::enttity pad1, pad2;
+
+struct BallComponent{
+  
+};
+
+struct PlayerComponent{
+  int playerNum;
+};
+
+struct PositionComponent {
+  int x, y;
+};
+
+struct VelocityComponent {
+  int x, y;
+};
+
+struct CubeComponent {
+  int w, h;
+};
+
+PositionComponent playerSpawnPosition = {20, 20};
+VelocityComponent playerSpawnVelocity = {200, 200};
+CubeComponent playerRect = {200, 20};
 
 int screen_width;
 int screen_height;
@@ -15,6 +42,191 @@ int dx = 1;
 int dy = 1;
 int player_Speed=20;
 
+void createPlayerEntity(PositionComponent pos, VelocityComponent vel, CubeComponent rect, PlayerComponent player)
+{
+    const entt::entity e = mRegistry.create();
+    mRegistry.emplace<PositionComponent>(e, pos);
+    mRegistry.emplace<VelocityComponent>(e, vel);
+    mRegistry.emplace<CubeComponent>(e, rect);  
+
+    mRegistry.emplace<PlayerComponent>(e, player);  
+
+    if (player.playerID == 1){
+        pad1 = e;
+    }
+    else{
+        pad2 = e;
+    }
+
+}
+
+void createBallEntity(PositionComponent pos, VelocityComponent vel, CubeComponent rect)
+{
+    const entt::entity e = mRegistry.create();
+    mRegistry.emplace<PositionComponent>(e, pos);
+    mRegistry.emplace<VelocityComponent>(e, vel);
+    mRegistry.emplace<CubeComponent>(e, rect);  
+
+    mRegistry.emplace<BallComponent>(e); 
+
+}
+
+
+void cubeRenderSystem(SDL_Renderer* renderer) {
+  SDL_SetRenderDrawColor(renderer, 255, 255 ,255, 1);
+
+  const auto view = reg.view<PositionComponent, CubeComponent>();
+  for (const entt::entity e : view) {
+    const PositionComponent position = view.get<PositionComponent>(e);
+    const CubeComponent cube = view.get<CubeComponent>(e);
+
+    SDL_Rect rect = { position.x, position.y, cube.w, cube.h };    
+    SDL_RenderFillRect(renderer, &rect);
+  }
+}
+
+void movementSystem(double dT) {
+  auto view = reg.view<PositionComponent, VelocityComponent>();
+  for (const entt::entity e : view) {
+    PositionComponent& pos = view.get<PositionComponent>(e);
+    VelocityComponent& vel = view.get<VelocityComponent>(e);
+
+        
+        pos.x += vel.x * dT;
+        pos.y += vel.y * dT;
+  }
+}
+
+void bounceSystem(double dT){
+  auto view = reg.view<PositionComponent, VelocityComponent, BallComponent, CubeComponent>();
+  for (const entt::entity e: view){
+     PositionComponent& pos = view.get<PositionComponent>(e);
+     VelocityComponent& vel = view.get<VelocityComponent>(e);
+     CubeComponent& cub = view.get<CubeComponent>(e);
+    if (pos.x <= 0)
+    {
+      vel.x *= -1;
+    }
+
+    if (pos.x + cub.w >= SCREEN_WIDTH)
+    {
+      vel.x *= -1;
+    }
+
+    if (pos.y <= 0)
+    {
+      vel.y *= -1;
+    }
+
+    if (pos.y + cub.h >= SCREEN_HEIGHT)
+    {
+      vel.y *= -1;
+    }
+  }
+}
+
+bool mouseBounceInputSystem(int x, int y)
+{
+  auto view = reg.view<PositionComponent, CubeComponent, VelocityComponent>();
+  for (const entt::entity e : view) {
+    const PositionComponent& pos = view.get<PositionComponent>(e);
+    VelocityComponent& vel = view.get<VelocityComponent>(e);
+    const CubeComponent& cub = view.get<CubeComponent>(e);
+    
+    if (
+      y >= pos.y &&
+      x >= pos.x &&
+      y <= pos.y + cub.h &&
+      x <= pos.x + cub.w    
+    ) {
+      vel.x *= -1.2;
+      vel.y *= -1.2;
+    }
+  }
+  return true;
+}
+
+
+bool paddleEventSystem(SDL_Event event) {
+  auto view = reg.view< VelocityComponent, PlayerComponent, PositionComponent, CubeComponent>();
+  for (const entt::entity e : view){
+    VelocityComponent& vel = view.get<VelocityComponent>(e);
+    const PlayerComponent player = view.get<PlayerComponent>(e);
+    const PositionComponent pos = view.get<PositionComponent>(e);
+    const CubeComponent cube = view.get<CubeComponent>(e);
+    int id = player.playerNum;
+    switch( event.type ){
+            /* Look for a keypress */
+            case SDL_KEYDOWN:
+                /* Check the SDLKey values and move change the coords */
+                switch( event.key.keysym.sym ){
+                    case SDLK_LEFT:
+                      if (id == 1){
+                        if(pos.x >= 0){
+                          vel.x = -200;
+                        } else {
+                          vel.x = 0;
+                        }
+                      }
+                      break;
+                    case SDLK_RIGHT:
+                      if (id == 1){
+                        if(pos.x + 100  <= SCREEN_WIDTH){
+                          vel.x = 200;  
+                        } else{
+                          vel.x = 0;
+                        }
+                      }
+                      break;
+                    case SDLK_a:
+                      if (id == 2){
+                        if(pos.x >= 0){
+                          vel.x = -200;
+                        } else {
+                          vel.x = 0;
+                        }
+                      }
+                      break;
+                    case SDLK_d:
+                      if(id == 2){
+                        if(pos.x + 100  <= SCREEN_WIDTH){
+                          vel.x = 200;  
+                        } else{
+                          vel.x = 0;
+                        }
+                      }
+                      break;
+                }
+                break;
+            case SDL_KEYUP:
+                switch( event.key.keysym.sym ){
+                    case SDLK_LEFT:
+                        if( vel.x < 0 )
+                            vel.x = 0;
+                        break;
+                    case SDLK_RIGHT:
+                        if( vel.x > 0 )
+                            vel.x = 0;
+                        break;
+                    case SDLK_a:
+                      if (vel.x < 0){
+                        vel.x = 0;
+                      }
+                      break;
+                    case SDLK_d:
+                      if(vel.x > 0){
+                        vel.x = 0;
+                      }
+                      break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+}
+}
 
 Game::Game(){
     FPS = 60;
@@ -184,7 +396,7 @@ void Game ::render(){
 
 void Game ::setup(){
     std::cout <<"Game setuping"<<std::endl;
-
+    createPlayerEntity();
     ball.x = screen_width/2;
     ball.y = screen_height/2;
     ball.h = 20;
