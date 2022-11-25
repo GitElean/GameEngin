@@ -4,10 +4,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>  
 
+int screen_width;
+int screen_height;
 
-SDL_Rect rec1;
-SDL_Rect rec2;
 
+SDL_Rect sandbag;
+SDL_Rect player;
+SDL_Rect background;
 
 Game::Game(){
     FPS = 60;
@@ -25,6 +28,8 @@ void Game ::init(const char* title, int width, int height){
     window = SDL_CreateWindow(title, 0, 0, width, height, 0);
     renderer = SDL_CreateRenderer(window, -1, 0);
     isRunning = true;
+    screen_height = height;
+    screen_width = width;
 }
 
 void Game::handleEvents()
@@ -38,6 +43,32 @@ void Game::handleEvents()
     {
       isRunning = false;
     }
+
+
+    if (event.type == SDL_KEYDOWN)
+    {
+      switch (event.key.keysym.sym)
+      {
+      case SDLK_RIGHT:
+        player.x += 30;
+        
+        
+        break;
+      case SDLK_LEFT:
+        player.x -= 30;
+        break;
+      
+      case SDLK_UP:
+        player.y -= 160;
+        break;
+    
+      /*case SDLK_z:
+        Uint32 color = SDL_SetRenderDrawColor(renderer, 255, 10, 10, 1);
+        int SDL_FillRect(renderer, &sandbag, color);
+        break;*/
+      }
+    }
+    
   }
 }
 
@@ -64,6 +95,8 @@ void Game::frameEnd(){
 void Game ::update(){
     std::cout <<"Game updating"<<std::endl;
 
+
+
 }
 void Game ::render(){
     std::cout <<"Game rendering"<<std::endl;
@@ -72,14 +105,31 @@ void Game ::render(){
     SDL_RenderClear(renderer);
 
     
-    SDL_Surface* surface = IMG_Load("./assets/kroniireference1_stroke.png");
+    SDL_Surface* surBackground = IMG_Load("./assets/background.png");
+    SDL_Texture* texBackground = SDL_CreateTextureFromSurface(renderer, surBackground);
+    SDL_FreeSurface(surBackground);
+
+    SDL_RenderCopy(renderer, texBackground, nullptr , &background);
+    SDL_DestroyTexture(texBackground);
+
+
+    SDL_Surface* surface = IMG_Load("./assets/kronii.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
     SDL_FreeSurface(surface);
 
-    SDL_RenderCopy(renderer, texture, nullptr , &rec2);
+    SDL_RenderCopy(renderer, texture, nullptr , &player);
 
     SDL_DestroyTexture(texture);
+
+    SDL_Surface* surface2 = IMG_Load("./assets/sandbag.png");
+    SDL_Texture* texture2 = SDL_CreateTextureFromSurface(renderer, surface2);
+
+    SDL_FreeSurface(surface2);
+
+    SDL_RenderCopy(renderer, texture2, nullptr , &sandbag);
+
+    SDL_DestroyTexture(texture2);
 
 
 
@@ -88,15 +138,20 @@ void Game ::render(){
 
 }
 void Game ::setup(){
-    rec1.x = 400;
-    rec1.y = 300;
-    rec1.h = 500;
-    rec1.w = 240;
+    sandbag.x = 1100;
+    sandbag.y = 250;
+    sandbag.h = 390;
+    sandbag.w = 220;
 
-    rec2.x = 200;
-    rec2.y = 10;
-    rec2.h = 720;
-    rec2.w = 500;
+    player.x = 100;
+    player.y = 250;
+    player.h = 396;
+    player.w = 275;
+
+    background.x = -screen_width/2.5;
+    background.y = 0;
+    background.h = screen_height*1.1;
+    background.w = screen_width*1.8;
 
     std::cout <<"Game setuping"<<std::endl;
 

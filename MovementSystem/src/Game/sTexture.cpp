@@ -86,7 +86,7 @@ void STexture::load(std::string path){
 
     SDL_FreeSurface(surface);
 
-    SDL_RenderCopy(renderer, texture, nullptr , &rec2);
+    SDL_RenderCopy(renderer, texture, nullptr , &player);
 
     SDL_DestroyTexture(texture);*/
 }

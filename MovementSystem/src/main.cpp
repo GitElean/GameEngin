@@ -6,7 +6,7 @@
 Game *game = nullptr;
 
 //Screen dimension constantsa
-const int SCREEN_WIDTH = 1024;
+const int SCREEN_WIDTH = 1366;
 const int SCREEN_HEIGHT = 768;
 
 int main( int argc, char* args[] )
