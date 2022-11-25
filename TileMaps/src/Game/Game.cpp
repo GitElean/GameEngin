@@ -11,7 +11,7 @@
 
 #include "Scene/Entities.hpp"
 #include "Scene/Components.hpp"
-#include "Scene/Systems.hpp"
+#include "Scene/Systemss.hpp"
 
 int screen_width;
 int screen_height;
@@ -60,10 +60,10 @@ void Game::setup()
   player.addComponent<MovementComponent>(MovementComponent{glm::vec2(50, 50)});
   player.addComponent<ColliderComponent>(ColliderComponent{glm::vec2(50, 50)});
 
-  scene->addSetupSystem(new HelloSystem());
-  AutoTileSystem* tilesetSystem = new AutoTileSystem(renderer, window);
-  scene->addSetupSystem(tilesetSystem);
-  scene->addRenderSystem(tilesetSystem);
+  scene->addSetupSystems(new HelloSystems());
+  AutoTileSystems* tilesetSystems = new AutoTileSystems(renderer, window);
+  scene->addSetupSystems(tilesetSystems);
+  scene->addRenderSystems(tilesetSystems);
 
   scene->setup();
 }
@@ -111,12 +111,12 @@ void Game::handleEvents()
 
     if (event.type == SDL_KEYDOWN)
     {
-      // bounceInputSystem(event.key.keysym.sym);
+      // bounceInputSystems(event.key.keysym.sym);
     }
 
     if (event.type == SDL_MOUSEBUTTONDOWN)
     {
-      // mouseBounceInputSystem(event.motion.x, event.motion.y);
+      // mouseBounceInputSystems(event.motion.x, event.motion.y);
     }
   }
 }

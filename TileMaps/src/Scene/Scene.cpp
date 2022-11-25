@@ -7,7 +7,7 @@
 
 #include "Entities.hpp"
 #include "Components.hpp"
-#include "System.h"
+#include "Systems.h"
 
 
 Scene::Scene(const std::string& name)
@@ -29,35 +29,35 @@ Entity Scene::createEntity(const std::string& name, int x, int y)
   return entity;
 }
 
-void Scene::addSetupSystem(SetupSystem* s)
+void Scene::addSetupSystems(SetupSystems* s)
 {
   s->setScene(this);
-  setupSystems.push_back(s);
+  setupSystemss.push_back(s);
 }
 
-void Scene::addInputSystem(InputSystem* s)
+void Scene::addInputSystems(InputSystems* s)
 {
   s->setScene(this);
-  inputSystems.push_back(s);
+  inputSystemss.push_back(s);
 }
 
-void Scene::addUpdateSystem(UpdateSystem* s)
+void Scene::addUpdateSystems(UpdateSystems* s)
 {
   s->setScene(this);
-  updateSystems.push_back(s);
+  updateSystemss.push_back(s);
 }
 
-void Scene::addRenderSystem(RenderSystem* s)
+void Scene::addRenderSystems(RenderSystems* s)
 {
   s->setScene(this);
-  renderSystems.push_back(s);
+  renderSystemss.push_back(s);
 }
 
 void Scene::setup()
 {
   std::cout << "Scene Setup" << std::endl;
   
-  for (SetupSystem* sys: setupSystems)
+  for (SetupSystems* sys: setupSystemss)
   {
     sys->run();
   }
@@ -67,7 +67,7 @@ void Scene::update(double dT)
 {
   std::cout << "Scene Update" << std::endl;
   
-  for (UpdateSystem* sys: updateSystems)
+  for (UpdateSystems* sys: updateSystemss)
   {
     sys->run(dT);
   }
@@ -77,7 +77,7 @@ void Scene::render(SDL_Renderer* renderer)
 {
   std::cout << "Scene Render" << std::endl;
   
-  for (RenderSystem* sys: renderSystems)
+  for (RenderSystems* sys: renderSystemss)
   {
     sys->run(renderer);
   }

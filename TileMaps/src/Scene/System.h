@@ -1,9 +1,9 @@
-#ifndef SYSTEM_H
-#define SYSTEM_H
+#ifndef Systems_H
+#define Systems_H
 #include "Scene.h"
 #include <SDL2/SDL.h>
 
-class System {
+class Systems {
   protected:
     Scene* scene;
 
@@ -11,22 +11,22 @@ class System {
     void setScene(Scene* s) { scene = s; };
 };
 
-class SetupSystem : public System {
+class SetupSystems : public Systems {
   public:
     virtual void run() = 0;
 };
 
-class InputSystem : public System {
+class InputSystems : public Systems {
   public:
     virtual void run(SDL_Event* event) = 0;
 };
 
-class UpdateSystem : public System {
+class UpdateSystems : public Systems {
   public:
     virtual void run(double dT) = 0;
 };
 
-class RenderSystem : public System {
+class RenderSystems : public Systems {
   public:
     virtual void run(SDL_Renderer* renderer) = 0;
 };

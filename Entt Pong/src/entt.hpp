@@ -7830,7 +7830,7 @@ namespace entt {
 /**
  * @brief Minimal implementation of the monostate pattern.
  *
- * A minimal, yet complete configuration system built on top of the monostate
+ * A minimal, yet complete configuration Systems built on top of the monostate
  * pattern. Thread safe by design, it works only with basic types like `int`s or
  * `bool`s.<br/>
  * Multiple types and therefore more than one value can be associated with a
@@ -16346,7 +16346,7 @@ class sigh;
  * This class serves mainly two purposes:
  *
  * * Creating signals to use later to notify a bunch of listeners.
- * * Collecting results from a set of functions like in a voting system.
+ * * Collecting results from a set of functions like in a voting Systems.
  *
  * @tparam Ret Return type of a function type.
  * @tparam Args Types of arguments of a function type.
@@ -24492,7 +24492,7 @@ private:
  */
 
 /**
- * @brief Fast and reliable entity-component system.
+ * @brief Fast and reliable entity-component Systems.
  * @tparam Entity A valid entity type (see entt_traits for more details).
  */
 template<typename Entity>
@@ -27945,7 +27945,7 @@ private:
  */
 
 /**
- * @brief Fast and reliable entity-component system.
+ * @brief Fast and reliable entity-component Systems.
  * @tparam Entity A valid entity type (see entt_traits for more details).
  */
 template<typename Entity>
@@ -40906,7 +40906,7 @@ struct ENTT_API meta_context {
 /*! @brief Opaque container for a meta context. */
 struct meta_ctx {
     /**
-     * @brief Binds the meta system to a given context.
+     * @brief Binds the meta Systems to a given context.
      * @param other A valid context to which to bind.
      */
     static void bind(meta_ctx other) ENTT_NOEXCEPT {
@@ -41097,7 +41097,7 @@ struct meta_associative_container_traits;
 
 /**
  * @brief Provides the member constant `value` to true if a given type is a
- * pointer-like type from the point of view of the meta system, false otherwise.
+ * pointer-like type from the point of view of the meta Systems, false otherwise.
  * @tparam Type Potentially pointer-like type.
  */
 template<typename>
@@ -43514,7 +43514,7 @@ struct ENTT_API meta_context {
 /*! @brief Opaque container for a meta context. */
 struct meta_ctx {
     /**
-     * @brief Binds the meta system to a given context.
+     * @brief Binds the meta Systems to a given context.
      * @param other A valid context to which to bind.
      */
     static void bind(meta_ctx other) ENTT_NOEXCEPT {
@@ -46706,7 +46706,7 @@ template<auto Member, typename Type>
 namespace entt {
 
 /**
- * @brief Makes plain pointers pointer-like types for the meta system.
+ * @brief Makes plain pointers pointer-like types for the meta Systems.
  * @tparam Type Element type.
  */
 template<typename Type>
@@ -46724,7 +46724,7 @@ struct is_meta_pointer_like<Type (*)[N]>
 
 /**
  * @brief Makes `std::shared_ptr`s of any type pointer-like types for the meta
- * system.
+ * Systems.
  * @tparam Type Element type.
  */
 template<typename Type>
@@ -46733,7 +46733,7 @@ struct is_meta_pointer_like<std::shared_ptr<Type>>
 
 /**
  * @brief Makes `std::unique_ptr`s of any type pointer-like types for the meta
- * system.
+ * Systems.
  * @tparam Type Element type.
  * @tparam Args Other arguments.
  */
@@ -47073,7 +47073,7 @@ struct meta_associative_container_traits;
 
 /**
  * @brief Provides the member constant `value` to true if a given type is a
- * pointer-like type from the point of view of the meta system, false otherwise.
+ * pointer-like type from the point of view of the meta Systems, false otherwise.
  * @tparam Type Potentially pointer-like type.
  */
 template<typename>
@@ -64254,7 +64254,7 @@ class sigh;
  * This class serves mainly two purposes:
  *
  * * Creating signals to use later to notify a bunch of listeners.
- * * Collecting results from a set of functions like in a voting system.
+ * * Collecting results from a set of functions like in a voting Systems.
  *
  * @tparam Ret Return type of a function type.
  * @tparam Args Types of arguments of a function type.
@@ -65566,7 +65566,7 @@ class sigh;
  * This class serves mainly two purposes:
  *
  * * Creating signals to use later to notify a bunch of listeners.
- * * Collecting results from a set of functions like in a voting system.
+ * * Collecting results from a set of functions like in a voting Systems.
  *
  * @tparam Ret Return type of a function type.
  * @tparam Args Types of arguments of a function type.

@@ -2,7 +2,7 @@
 #include "Game.h"
 #include <SDL2/SDL.h>
 
-SDL_Rect ball;
+SDL_Rect sandbag;
 SDL_Rect player1;
 SDL_Rect player2;
 

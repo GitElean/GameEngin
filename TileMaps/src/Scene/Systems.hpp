@@ -3,16 +3,16 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include "./STexture.cpp"
-#include "./System.h"
+#include "./Systems.h"
 #include "./Components.hpp"
 
 
-class MovementSystem : public UpdateSystem {
+class MovementSystems : public UpdateSystems {
   private:
     int counter = 0;
 
   public:
-    MovementSystem(int c) : counter(c) {}
+    MovementSystems(int c) : counter(c) {}
 
     void run(double dT) override {
       const auto view = scene->r.view<TransformComponent, MovementComponent>();
@@ -50,7 +50,7 @@ class MovementSystem : public UpdateSystem {
     }
 };
 
-class CubeSystem : public RenderSystem {
+class CubeSystems : public RenderSystems {
   public:
     void run(SDL_Renderer* renderer) override {
       SDL_SetRenderDrawColor(renderer, 255, 100, 100, 1);
@@ -70,23 +70,23 @@ class CubeSystem : public RenderSystem {
     }
 };
 
-class HelloSystem : public SetupSystem {
+class HelloSystems : public SetupSystems {
   public:
-    HelloSystem() {
-      std::cout << "Hello System Constructor" << std::endl;
+    HelloSystems() {
+      std::cout << "Hello Systems Constructor" << std::endl;
     }
 
-    ~HelloSystem() {
-      std::cout << "Hello System Destructor" << std::endl;
+    ~HelloSystems() {
+      std::cout << "Hello Systems Destructor" << std::endl;
     }
 
     void run() override {
-      std::cout << "Hello System!" << std::endl;
+      std::cout << "Hello Systems!" << std::endl;
     }
 };
 
 
-class TilemapSystem : public SetupSystem, public RenderSystem {
+class TilemapSystems : public SetupSystems, public RenderSystems {
   private:
     SDL_Renderer* renderer;
 
@@ -114,12 +114,12 @@ class TilemapSystem : public SetupSystem, public RenderSystem {
     SDL_Texture** tilemap;
 
   public:
-    TilemapSystem(SDL_Renderer* r) : renderer(r) {
-      std::cout << "Tile map system started" << std::endl;
+    TilemapSystems(SDL_Renderer* r) : renderer(r) {
+      std::cout << "Tile map Systems started" << std::endl;
       tilemap = new SDL_Texture*[tilesWidth * tilesHeight];
     }
 
-    ~TilemapSystem() {
+    ~TilemapSystems() {
       /*
       for(int i = 0; i < tilesCount; i++) {
         SDL_FreeSurface(surfaces[i]);
@@ -174,7 +174,7 @@ class TilemapSystem : public SetupSystem, public RenderSystem {
 };
 
 
-class AdvancedTilemapSystem : public SetupSystem, public RenderSystem {
+class AdvancedTilemapSystems : public SetupSystems, public RenderSystems {
   private:
     SDL_Renderer* renderer;
     SDL_Window* window;
@@ -196,11 +196,11 @@ class AdvancedTilemapSystem : public SetupSystem, public RenderSystem {
     int tilesHeight;
 
   public:
-    AdvancedTilemapSystem(SDL_Renderer* r, SDL_Window* w) : renderer(r), window(w) {
-      std::cout << "Tile map system started" << std::endl;
+    AdvancedTilemapSystems(SDL_Renderer* r, SDL_Window* w) : renderer(r), window(w) {
+      std::cout << "Tile map Systems started" << std::endl;
     }
 
-    ~AdvancedTilemapSystem() {
+    ~AdvancedTilemapSystems() {
     }
 
     // setup
@@ -262,7 +262,7 @@ class AdvancedTilemapSystem : public SetupSystem, public RenderSystem {
 
 
 
-class AdvancedTileSetSystem : public SetupSystem, public RenderSystem {
+class AdvancedTileSetSystems : public SetupSystems, public RenderSystems {
   private:
     SDL_Renderer* renderer;
     SDL_Window* window;
@@ -285,9 +285,9 @@ class AdvancedTileSetSystem : public SetupSystem, public RenderSystem {
     int tilemapHeight;
     
   public:
-    AdvancedTileSetSystem(SDL_Renderer* r, SDL_Window* w) : renderer(r), window(w) {}
+    AdvancedTileSetSystems(SDL_Renderer* r, SDL_Window* w) : renderer(r), window(w) {}
 
-    ~AdvancedTileSetSystem() {}
+    ~AdvancedTileSetSystems() {}
 
     // setup
     void run() override {

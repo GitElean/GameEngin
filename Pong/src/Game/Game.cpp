@@ -6,7 +6,7 @@
 int screen_width;
 int screen_height;
 
-SDL_Rect ball;
+SDL_Rect sandbag;
 SDL_Rect player1;
 SDL_Rect player2;
 
@@ -115,20 +115,20 @@ void Game::frameEnd(){
 void Game ::update(){
     std::cout <<"Game updating"<<std::endl;
     
-    if (ball.y + ball.h >= screen_height)
+    if (sandbag.y + sandbag.h >= screen_height)
     {
         dy *= -1; 
     }
     
-    if (ball.y + ball.h <= 0)
+    if (sandbag.y + sandbag.h <= 0)
     {
         dy *= -1; 
     }
 
     if (
-      ball.x + ball.w >= player2.x &&
-      ball.y + ball.h >= player2.y &&
-      ball.y <= player2.y + player2.h
+      sandbag.x + sandbag.w >= player2.x &&
+      sandbag.y + sandbag.h >= player2.y &&
+      sandbag.y <= player2.y + player2.h
     )
     {
       dx*=-1.5;
@@ -136,9 +136,9 @@ void Game ::update(){
     }
 
     if (
-      ball.y + ball.h >= player1.y &&
-      ball.x + ball.w >= player1.x &&
-      ball.x <= player1.x + player1.w
+      sandbag.y + sandbag.h >= player1.y &&
+      sandbag.x + sandbag.w >= player1.x &&
+      sandbag.x <= player1.x + player1.w
       )
     {
       dx*=-1.5;
@@ -148,20 +148,20 @@ void Game ::update(){
     
     
 
-    if (ball.x + ball.w >= screen_width)
+    if (sandbag.x + sandbag.w >= screen_width)
     {
         isRunning = false;
     }
 
-    if (ball.x + ball.w <= 0)
+    if (sandbag.x + sandbag.w <= 0)
     {
         isRunning = false;
     }
     
-    ball.x +=speed * dx * deltaTime;
-    ball.y +=speed * dy * deltaTime;
-    std::cout<<ball.x<<std::endl;
-    std::cout<<ball.y<<std::endl;
+    sandbag.x +=speed * dx * deltaTime;
+    sandbag.y +=speed * dy * deltaTime;
+    std::cout<<sandbag.x<<std::endl;
+    std::cout<<sandbag.y<<std::endl;
     std::cout<<deltaTime<<std::endl;
 
 }
@@ -172,7 +172,7 @@ void Game ::render(){
     SDL_RenderClear(renderer);
 
     SDL_SetRenderDrawColor(renderer, 250, 250, 250, 1);
-    SDL_RenderFillRect(renderer, &ball);
+    SDL_RenderFillRect(renderer, &sandbag);
     SDL_RenderFillRect(renderer, &player1);
     SDL_RenderFillRect(renderer, &player2);
 
@@ -185,10 +185,10 @@ void Game ::render(){
 void Game ::setup(){
     std::cout <<"Game setuping"<<std::endl;
 
-    ball.x = screen_width/2;
-    ball.y = screen_height/2;
-    ball.h = 20;
-    ball.w = 20;
+    sandbag.x = screen_width/2;
+    sandbag.y = screen_height/2;
+    sandbag.h = 20;
+    sandbag.w = 20;
 
     player1.x = 10;
     player1.y = 300;

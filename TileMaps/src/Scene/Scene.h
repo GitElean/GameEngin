@@ -8,17 +8,17 @@
 
 
 class Entity;
-class SetupSystem;
-class InputSystem;
-class UpdateSystem;
-class RenderSystem;
+class SetupSystems;
+class InputSystems;
+class UpdateSystems;
+class RenderSystems;
 
 class Scene {
   private:
-    std::vector<SetupSystem*> setupSystems;
-    std::vector<InputSystem*> inputSystems;
-    std::vector<UpdateSystem*> updateSystems;
-    std::vector<RenderSystem*> renderSystems;
+    std::vector<SetupSystems*> setupSystemss;
+    std::vector<InputSystems*> inputSystemss;
+    std::vector<UpdateSystems*> updateSystemss;
+    std::vector<RenderSystems*> renderSystemss;
 
   public:
     Scene(const std::string&);
@@ -31,10 +31,10 @@ class Scene {
       int x = 0,
       int y = 0
     );
-    void addSetupSystem(SetupSystem* s);
-    void addInputSystem(InputSystem* s);
-    void addUpdateSystem(UpdateSystem* s);
-    void addRenderSystem(RenderSystem* s);
+    void addSetupSystems(SetupSystems* s);
+    void addInputSystems(InputSystems* s);
+    void addUpdateSystems(UpdateSystems* s);
+    void addRenderSystems(RenderSystems* s);
 
     void setup();
     void update(double dT);
