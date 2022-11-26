@@ -2,6 +2,7 @@
 #define Systems_H
 #include "Scene.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 class Systems {
   protected:
@@ -30,5 +31,10 @@ class RenderSystems : public Systems {
   public:
     virtual void run(SDL_Renderer* renderer) = 0;
 };
+
+class MusicSystems : public Systems {
+  public:
+    virtual void run(SDL_Renderer* renderer) = 0;
+}
 
 #endif

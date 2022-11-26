@@ -69,3 +69,11 @@ class CubeSystems : public RenderSystems {
       }
     }
 };
+
+class SoundSystem : public SetupSystems {
+  public:
+  void run(Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
+  backgroundMusic = Mix_LoadWAV("./assets/CalliopeSong.mp3");
+  Mix_AllocateChannels(3);
+  Mix_PlayChannel(1,backgroundMusic,-1); )
+};
