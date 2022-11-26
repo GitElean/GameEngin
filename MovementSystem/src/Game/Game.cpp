@@ -4,6 +4,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>  
 #include <SDL2/SDL_mixer.h>
+#include <unistd.h>      
+#include <thread>
+#include <chrono>
 
 int screen_width;
 int screen_height;
@@ -56,22 +59,37 @@ void Game::handleEvents()
       isRunning = false;
     }
 
-
+// < y > 
     if (event.type == SDL_KEYDOWN)
     {
       switch (event.key.keysym.sym)
       {
       case SDLK_RIGHT:
+        if (player.x <= 1366 && player.x != sandbag.x+100 && player.x != sandbag.x-100)
+        {
         player.x += 30;
+        
+        }
+          
+        
         
         
         break;
       case SDLK_LEFT:
+      if (player.x>0 && player.x != sandbag.x)
+      {
         player.x -= 30;
+      }
+      
+        
         break;
       
       case SDLK_UP:
-        player.y -= screen_height/3.5;
+        if (player.y >= 250)
+        {
+            player.y -= screen_height/3.5;
+        }
+        
         break;
     
       case SDLK_z:
@@ -81,6 +99,26 @@ void Game::handleEvents()
         SDL_RenderFillRect(renderer, &hitbox);
         //int SDL_FillRect(renderer, &sandbag);
         break;
+        case SDLK_DOWN:
+          
+          if (player.h == 396)
+          {
+            player.h = player.h/2;
+            player.y += player.h;
+          
+          }else{
+            player.h = player.h*2;
+            player.y -= player.h/2;
+          }
+          
+        break;
+        case SDLK_LSHIFT:
+        player.x += 200;
+        
+        
+        break;
+
+        
       }
     }
     
@@ -107,7 +145,13 @@ void Game::frameEnd(){
 
 void Game ::update(){
 
-
+    if (player.y<250)
+    {
+      player.y +=12;
+    }
+    
+    
+    
 
 }
 void Game ::render(){
@@ -149,7 +193,6 @@ void Game ::render(){
     SDL_RenderPresent(renderer);
     
         
-    
 
 
 
