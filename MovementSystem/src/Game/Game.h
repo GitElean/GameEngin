@@ -24,7 +24,7 @@ public:
     void handleEvents();
     void frameStart();
     void frameEnd();
-
+    void initAudio();
     void update();
     void render();
     void setup();

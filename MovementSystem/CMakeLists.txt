@@ -19,5 +19,6 @@ target_link_libraries(${PROJECT_NAME}
   SDL2main
   SDL2
   SDL2_image
+  SDL2_mixer
   GL
 )

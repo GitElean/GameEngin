@@ -15,8 +15,8 @@ int main( int argc, char* args[] )
     game = new Game();
 
     game->init("Sprite Renderer", SCREEN_WIDTH, SCREEN_HEIGHT);
-
     game->setup();
+    game->initAudio();
 
     while (game->running())
     {
