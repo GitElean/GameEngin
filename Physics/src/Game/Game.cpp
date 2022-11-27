@@ -14,6 +14,7 @@ int screen_height;
 
 SDL_Rect sandbag;
 SDL_Rect player;
+SDL_Rect playerCrouch;
 SDL_Rect background;
 SDL_Rect hitbox;
 
@@ -70,7 +71,7 @@ void Game::handleEvents()
         player.x += 30;
           if (player.x+player.w != sandbag.x+sandbag.w)
           {
-            player.x -=1
+            player.x -=1;
           }
           
         }
@@ -194,7 +195,22 @@ void Game ::render(){
     
     SDL_RenderDrawRect(renderer, &hitbox);
     
+    SDL_Surface* crouch = IMG_Load("./assets/smallKronni.png");
+    SDL_Texture* textureCrouch = SDL_CreateTextureFromSurface(renderer, crouch);
+
+    SDL_FreeSurface(crouch);
+
+    if (SDL_KEYDOWN == 40)
+    {
+      SDL_RenderCopy(renderer, textureCrouch, nullptr , &playerCrouch);
+    }
+    
+
+    SDL_DestroyTexture(texture);
+
     SDL_RenderPresent(renderer);
+    
+
     
         
 
@@ -216,6 +232,11 @@ void Game ::setup(){
     player.y = 250;
     player.h = 396;
     player.w = 275;
+
+    playerCrouch.x = player.x;
+    playerCrouch.y = player.y+player.h/2;
+    playerCrouch.h = player.h/2;
+    playerCrouch.w = player.w;
 
     background.x = -screen_width/2.5;
     background.y = 0;
